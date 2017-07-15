@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">The Sound of Death</string>
+<string name="app_name">The Sound of Death</string>
+    <string name="Press_me">Press_me</string>
+    <string name="buttonStyle"></string>
+    <string name="text_to_speech"></string>
+
 </resources>
