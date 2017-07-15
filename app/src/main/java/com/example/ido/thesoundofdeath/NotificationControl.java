@@ -6,10 +6,6 @@ import com.example.ido.thesoundofdeath.Exceptions.InvalidPositionException;
 
 import java.util.Random;
 
-/**
- * Created by noy on 05/07/2017.
- */
-
 public class NotificationControl {
     float pos; // the position in degree
     int x;
@@ -22,13 +18,13 @@ public class NotificationControl {
     //directions
     enum direction {NORTH_EAST, NORTH_WEST, NORTH,SOUTH, SOUTH_EAST, SOUTH_WEST, WEST,EAST}
     static String NORTH_EAST = "Object in north east!";
-    static String NORTH_WEST= "Object in north west!";
     static String NORTH = "Object in north!";
+    static String NORTH_WEST= "Object in north west!";
+    static String WEST = "object in west!";
+    static String SOUTH_WEST = "object in south west!";
     static String SOUTH = "object in south!";
     static String SOUTH_EAST = "object in south east!";
-    static String SOUTH_WEST = "object in south west!";
-    static String WEST = "object in west!";
-    static String EAST = "object in EAST!";
+    static String EAST = "object in east!";
 
 
     public NotificationControl(int pixelX, int pixelY){
@@ -61,15 +57,25 @@ public class NotificationControl {
 
     // x,y style
     public void  updateDir(float x, float y){
-        if(x/pixelX < 0.5)
+        int _1_5 = pixelX / 5;
+        int _2_5 = pixelX * 2 / 5;
+        int _3_5 = pixelX * 3 / 5;
+        int _4_5 = pixelX * 4 / 5;
+
+        if(x >= 0 && x < _1_5)
             currDir = direction.WEST;
+        else if (x >= _1_5 && x < _2_5)
+            currDir = direction.NORTH_WEST;
+        else if (x >= _1_5 && x < _3_5)
+            currDir = direction.NORTH;
+        else if (x >= _1_5 && x < _4_5)
+            currDir = direction.NORTH_EAST;
         else
             currDir = direction.EAST;
     }
 
 
-
-        public String getCurrDirMsg(){
+    public String getCurrDirMsg(){
         switch (currDir) {
             case NORTH_EAST:
                 return NORTH_EAST;

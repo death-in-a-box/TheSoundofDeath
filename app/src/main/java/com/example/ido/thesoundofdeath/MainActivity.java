@@ -67,20 +67,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
         }
         notificationControl.updateDir(x,y);
         final String notificMsgDir = notificationControl.getCurrDirMsg();
-        Tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    Tts.setLanguage(Locale.UK);
-                    String toSpeak = notificMsgDir;
-                    Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                    Tts.speak((CharSequence) (toSpeak), TextToSpeech.QUEUE_FLUSH, null, null);
-
-
-                }
-            }
-        });
-
+        Toast.makeText(getApplicationContext(), notificMsgDir, Toast.LENGTH_SHORT).show();
+        Tts.speak((CharSequence) (notificMsgDir), TextToSpeech.QUEUE_FLUSH, null, null);
         return true;
     }
 
@@ -130,6 +118,32 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
                     Log.d("on click", "mp is null");
                 else
                     dirSpeaker.start();
+            }
+        });
+
+
+        Tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    Tts.setLanguage(Locale.UK);
+                    /*
+                    String toSpeak = notificMsgDir;
+                    Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                    Tts.speak((CharSequence) (toSpeak), TextToSpeech.QUEUE_FLUSH, null, null);
+                    */
+
+                }
+            }
+        });
+
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toSpeak = ed1.getText().toString();
+                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                Tts.speak((CharSequence) (toSpeak), TextToSpeech.QUEUE_FLUSH, null, null);
+
             }
         });
 
