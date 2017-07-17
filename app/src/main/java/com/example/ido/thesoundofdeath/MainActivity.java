@@ -32,8 +32,8 @@ import android.support.v4.view.MotionEventCompat;
 import com.example.ido.thesoundofdeath.Exceptions.InvalidPositionException;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener {
-    NotificationControl notificationControl = new NotificationControl(Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels);
     TextToSpeech Tts;
+    NotificationControl notificationControl = new NotificationControl(Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels);
     Button b1;
     EditText ed1;
     MediaPlayer dirSpeaker;
@@ -65,10 +65,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener {
             case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_UP:
         }
-        notificationControl.updateDir(x,y);
-        final String notificMsgDir = notificationControl.getCurrDirMsg();
-        Toast.makeText(getApplicationContext(), notificMsgDir, Toast.LENGTH_SHORT).show();
-        Tts.speak((CharSequence) (notificMsgDir), TextToSpeech.QUEUE_FLUSH, null, null);
+        notificationControl.acticateNotification(x, y, Tts);
         return true;
     }
 

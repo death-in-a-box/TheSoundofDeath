@@ -1,6 +1,7 @@
 package com.example.ido.thesoundofdeath;
 
 import android.speech.tts.TextToSpeech;
+import android.widget.Toast;
 
 import com.example.ido.thesoundofdeath.Exceptions.InvalidPositionException;
 
@@ -17,14 +18,14 @@ public class NotificationControl {
 
     //directions
     enum direction {NORTH_EAST, NORTH_WEST, NORTH,SOUTH, SOUTH_EAST, SOUTH_WEST, WEST,EAST}
-    static String NORTH_EAST = "Object in north east!";
-    static String NORTH = "Object in north!";
-    static String NORTH_WEST= "Object in north west!";
-    static String WEST = "object in west!";
+    static String NORTH_EAST = "Obstacle in front of you on the righ!";
+    static String NORTH = "Obstacle in front of you!";
+    static String NORTH_WEST= "Obstacle in front of you on the left!";
+    static String WEST = "Obstacle on the left!";
     static String SOUTH_WEST = "object in south west!";
     static String SOUTH = "object in south!";
     static String SOUTH_EAST = "object in south east!";
-    static String EAST = "object in east!";
+    static String EAST = "Obstacle on the right!";
 
 
     public NotificationControl(int pixelX, int pixelY){
@@ -97,6 +98,13 @@ public class NotificationControl {
                 break;
         }
         return"";
+    }
+
+    public void acticateNotification(int x, int y, TextToSpeech tts){
+        this.objectMsg = tts;
+        this.updateDir(x,y);
+        final String notificMsgDir = this.getCurrDirMsg();
+        objectMsg.speak((CharSequence) (notificMsgDir), TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
 
